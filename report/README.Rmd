@@ -4,7 +4,7 @@ output: github_document
 
 ---
 
-**Author**: Your name here  
+**Author**: Alex Rogers  
 **Date**: Last update: `r Sys.time()`
 
 
@@ -15,12 +15,7 @@ output: github_document
   Describe your hypotheses
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+I'm expecting the native English speakers to have higher overall VOT values than the bilingual speakers, since English VOT categories are in general higher than those of Spanish. I'm honestly not entirely sure what to expect from the F1 and F2 values. I think I remember something about /a/ having a higher f1 than other vowels, so I'm guessing that stimuli with /a/ in them will have higher f1 values, but I can't remember if that is a real thing or something I made up. I plan to look at the statistics when grouped by participant and by word so hopefully my data will be able to show vowel differences.
 
 
 # Prep
@@ -33,7 +28,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 #| warning: false 
 #| message: false
 # Load libraries here
-
+library("tidyverse")
 ```
 
 ## Load data
@@ -42,6 +37,10 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 #| label: load-data
 # You need to get all the files in the 'data' directory and combine them
 # Check previous examples we did in class 
+
+df <- list.files(path="../data", full.names = TRUE) %>% 
+  lapply(read_csv) %>% 
+  bind_rows
 
 ```
 
@@ -52,6 +51,12 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 # Convert from long to wide or wide to long format as necessary (check 
 # examples from class)
 # Create any other relevant variables here 
+newdf <- df %>%
+  separate("fileID", c("ID", "Word")) %>%
+  select( -c(notes, data)) %>%
+  na.omit()
+
+
 
 ```
 
@@ -64,6 +69,19 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 # Give some descriptive summaries of your data 
 # Display your descriptives in a table (try knitr::kable())
 
+wordstats <- newdf %>%
+  group_by(Word) %>%
+  summarize(meanF1 = mean(f1), meanF2 = mean(f2), meanVOT = mean(vot), sdF1 = sd(f1), sdF2 = sd(f2), sdVOT = sd(vot))
+
+idstats <- newdf %>%
+  group_by(ID) %>%
+  summarize(meanF1 = mean(f1), meanF2 = mean(f2), meanVOT = mean(vot), sdF1 = sd(f1), sdF2 = sd(f2), sdVOT = sd(vot))
+
+knitr::kable(wordstats,
+             caption = "Descriptive stats by word")
+knitr::kable(idstats,
+             caption = "Descriptive stats by participant ID")
+
 ```
 
 ## Visualization
@@ -72,6 +90,33 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 #| label: plots 
 #| fig.retina: 2
 # Include some plots here
+
+newdf %>%
+  ggplot() +
+  aes(x = ID , y = f1 ) +
+geom_boxplot(fill = "plum") + 
+  labs( 
+         subtitle="F1 Grouped by ID",
+         x="ID",
+         y="F1")
+
+newdf %>%
+  ggplot() +
+  aes(x = ID , y = f2 ) +
+geom_boxplot(fill = "#F8766D") + 
+  labs( 
+         subtitle="F2 Grouped by ID",
+         x="ID",
+         y="F2")
+
+newdf %>%
+  ggplot() +
+  aes(x = ID , y = vot ) +
+geom_boxplot(fill = "skyblue") + 
+  labs( 
+         subtitle="VOT Grouped by ID",
+         x="ID",
+         y="VOT")
 
 ```
 
@@ -88,6 +133,7 @@ If you need help consider the following sources:
   - Search the internet for HTML code (not recommended, but it works)
   - Check the code from my class presentations (may or may not be helpful)
 -->
+![Sample spectrogram of bi01_kaka](C:\Users\locom\Desktop\pa_4/praat.png)
 
 ## Hypothesis test
 
@@ -109,11 +155,6 @@ What did you enjoy? What did you hate? What did you learn?
 What would you do differently?
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The data seem to indicate that I was more or less on the right track with my hypothesis regarding VOT values. While a drastic difference when compared to the bi group, the native English speaking group did have overall higher VOT values. Disregarding outliers, that is, as there is one incredibly high VOT value from participant bi01 that cannot possibly be accurate. One thing I didn't hypothesize on was the formant values as a function of speaker ID. Looking at the descriptive statistics, it seems that native English speakers also had higher mean f1 and f2 values on average, though there is one standout per group that seems to break that trend. I don't know if those differences can be attributed to native language, bilingual status, or simply to the individual. I would have liked to be able to create an additional column "Vowel" so that I could analyze VOT, f1 and f1 as a function of vowel, but I couldn't figure out the code to do so.
 
 </br></br>

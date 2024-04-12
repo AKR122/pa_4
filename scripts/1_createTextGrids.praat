@@ -7,7 +7,7 @@
 
 form Enter information
 	comment Participant ID (folder with .wav files):
-	sentence fileID bi01
+	sentence fileID bi02
 endform
 
 
@@ -56,7 +56,7 @@ clearinfo
 # Begin loop ---------------------------------------------------
 #
 
-for i from number to XXXXX
+for i from number to numberOfFiles
 	select Strings allFiles
 	fileName$ = Get string... i
 	prefix$ = fileName$ - ".wav"
@@ -79,4 +79,5 @@ for i from number to XXXXX
 endfor
 
 # --------------------------------------------------------------
+
 

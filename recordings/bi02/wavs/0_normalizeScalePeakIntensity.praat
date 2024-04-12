@@ -1,4 +1,4 @@
-Create Strings as file list... soundFiles ./*.wav
+Create Strings as file list... soundFiles C:\Users\locom\Desktop\pa_4\recordings\bi02\wavs/*.wav
 select Strings soundFiles
 numberOfFiles = Get number of strings
 
