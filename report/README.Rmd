@@ -133,9 +133,12 @@ If you need help consider the following sources:
   - Search the internet for HTML code (not recommended, but it works)
   - Check the code from my class presentations (may or may not be helpful)
 -->
-![Sample spectrogram of bi01_kaka](C:\Users\locom\Desktop\pa_4/praat.png)
+![Sample spectrogram of bi01_kaka]("praat.png")
 ``` {R}
 knitr::include_graphics("../bi03_kaka.pdf")
+knitr::include_graphics("praat.png")
+
+
 ```
 
 ## Hypothesis test

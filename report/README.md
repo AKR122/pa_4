@@ -2,7 +2,7 @@ Programming assignment 4
 ================
 
 **Author**: Alex Rogers  
-**Date**: Last update: 2024-04-15 09:44:19.705417
+**Date**: Last update: 2024-04-15 13:07:04.99213
 
 # Overview
 
@@ -253,8 +253,7 @@ If you need help consider the following sources:
 -->
 
 <figure>
-<img src="C:\Users\locom\Desktop\pa_4/praat.png"
-alt="Sample spectrogram of bi01_kaka" />
+<img src="%22praat.png%22" alt="Sample spectrogram of bi01_kaka" />
 <figcaption aria-hidden="true">Sample spectrogram of
 bi01_kaka</figcaption>
 </figure>
@@ -264,6 +263,12 @@ knitr::include_graphics("../bi03_kaka.pdf")
 ```
 
 ![](../bi03_kaka.pdf)<!-- -->
+
+``` r
+knitr::include_graphics("praat.png")
+```
+
+![](praat.png)<!-- -->
 
 ## Hypothesis test
 
