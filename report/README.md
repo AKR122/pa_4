@@ -2,7 +2,7 @@ Programming assignment 4
 ================
 
 **Author**: Alex Rogers  
-**Date**: Last update: 2024-04-12 18:24:12.758647
+**Date**: Last update: 2024-04-15 09:44:19.705417
 
 # Overview
 
@@ -258,6 +258,12 @@ alt="Sample spectrogram of bi01_kaka" />
 <figcaption aria-hidden="true">Sample spectrogram of
 bi01_kaka</figcaption>
 </figure>
+
+``` r
+knitr::include_graphics("../bi03_kaka.pdf")
+```
+
+![](../bi03_kaka.pdf)<!-- -->
 
 ## Hypothesis test
 

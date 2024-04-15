@@ -134,6 +134,9 @@ If you need help consider the following sources:
   - Check the code from my class presentations (may or may not be helpful)
 -->
 ![Sample spectrogram of bi01_kaka](C:\Users\locom\Desktop\pa_4/praat.png)
+``` {R}
+knitr::include_graphics("../bi03_kaka.pdf")
+```
 
 ## Hypothesis test
 
